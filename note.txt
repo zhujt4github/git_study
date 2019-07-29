@@ -1,0 +1,52 @@
+1. Git安装后需要设置一下用户
+	$ git config --global user.name "Your Name"
+	$ git config --global user.email "email@example.com"
+2. 创建版本库 (请确保目录名（包括父目录）不包含中文。)
+	$ mkdir git_study
+	$ cd git_study
+!	$ git_init
+3. 把文件添加到版本库
+	所有的版本控制系统，其实只能跟踪文本文件的改动。
+	第一步，把文件添加到仓库
+!	$ git add readme.txt
+	第二步，把文件提交到仓库
+!	$ git commit -m <message>
+4. 运行 git status 查看结果
+!	$ git status
+5. 运行 git diff filename 查看文件的变动
+!	$ git diff readme.txt
+6. 运行 git log 查看变动历史
+	如果嫌输出信息太多，看得眼花缭乱的，可以试试加上--pretty=oneline参数
+!	git log
+7. 	版本回退
+	$ git reset --hard HEAD^  回退到上一个版本
+	$ git reset --hard HEAD^^ 回退到上上个版本
+	$ git reset --hard HEAD~n 回退往上的到第n个版本
+	$ git reset --hard commit id 回退到commit id的版本，可以使前几个字符。
+	
+	Git的版本回退速度非常快，因为Git在内部有个指向当前版本的HEAD指针，当你回退版本的时候，Git仅仅是把HEAD从指向append GPL：
+		┌────┐
+		│HEAD│
+		└────┘
+		   │
+		   └──> ○ append GPL
+				│
+				○ add distributed
+				│
+				○ wrote a readme file
+
+		改为指向add distributed：
+
+		┌────┐
+		│HEAD│
+		└────┘
+		   │
+		   │    ○ append GPL
+		   │    │
+		   └──> ○ add distributed
+				│
+				○ wrote a readme file
+
+8. 查看命令的历史记录
+	$ git reflog
+	
