@@ -120,9 +120,30 @@
 	创建+切换分支：git checkout -b <name>
 
 	合并某分支到当前分支：git merge <name>
+	合并分支时，加上--no-ff参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并。
 
 	删除分支：git branch -d <name>
 	
 16. 分支合并冲突
 	当多个分支进行提交时，可能存在冲突，Git无法执行快速合并，只能试图把各自修改合并起来，冲突只能手动修改完再提交
 	$ git log --graph 用图形方式查看合并情况
+	
+17.	状态存储
+	Git提供了一个stash功能，可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作
+	$ git stash 把当前的工作状态存储起来
+	$ git stash list 查看已经存储的工作状态
+	恢复现场
+	一是用git stash apply恢复，但是恢复后，stash内容并不删除，你需要用git stash drop来删除；	
+	另一种方式是用git stash pop，恢复的同时把stash内容也删了，
+18. 未被追踪的文件:指的是新建的文件或文件夹且还没加入到暂存区(新建的还没有被git add 过得) 
+	未加入到暂存区的文件:指的是已经被追踪过，但是没有加入到暂存区(已经执行过git add/commit的但是这次修改后还没有git add) 
+	举例: readme.md 已经被git add/git commit过，但是呢 我这次只是修改了，而且没有修改完，
+	不能commit test 新建的文件夹,没有被git add/git commit过 有个急事需要处理,这时候我需要切换分支，
+	去处理紧急任务,比如文中的举例去修改bug， 
+	正确的步骤: git add test（让git去追踪这个新文件） 
+				git stash保留现场 
+	如果我不执行这两个命令，那么我在修改BUG完成之后 git status，
+	就会发现readme.md 没有添加到暂存区，同时又多了个test文件,但是自己的readme.md没有完成，万万不可以提交，
+	这样导致bug的修改代码也提交不了。所以你需要 git stash，这样你在提交修改bug代码的时候 ，就不会看见readme.md 和 test。可以安心提交修改bug的代码。
+19. 开发一个新feature，最好新建一个分支；
+	如果要丢弃一个没有被合并过的分支，可以通过git branch -D <name>强行删除。
