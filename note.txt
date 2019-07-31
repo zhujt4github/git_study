@@ -99,3 +99,30 @@
 14. 从远程clone一个仓库
 	新建一个文件夹，右键运行“Git Bash Here”
 	输入git clone https://github.com/zhujt4github/test.git 可以把远程库复制到本地
+15. 分支branch
+	创建分支
+	$ git branch dev
+	切换到分支
+	$ git checkout dev
+	或者直接用 $ git checkout -b dev 创建并切换到分支
+	$ git branch 查看分支，带*号的为当前分支
+	合并分支
+	$ git merge branch_name 命令用于合并指定分支到当前分支。
+	删除分支
+	$ git branch -d dev 删除dev分支
+	
+	查看分支：git branch
+
+	创建分支：git branch <name>
+
+	切换分支：git checkout <name>
+
+	创建+切换分支：git checkout -b <name>
+
+	合并某分支到当前分支：git merge <name>
+
+	删除分支：git branch -d <name>
+	
+16. 分支合并冲突
+	当多个分支进行提交时，可能存在冲突，Git无法执行快速合并，只能试图把各自修改合并起来，冲突只能手动修改完再提交
+	$ git log --graph 用图形方式查看合并情况
